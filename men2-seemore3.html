@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar start -->
+    <div class="nav-main">
+        <div class="logo">
+            <h1><span>Fashion</span>Plus</h1>
+        </div>
+
+        <div class="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Men</a>
+                    <ul class="submenu">
+                        <li><a href="shirt.html">Shirts</a></li>
+                        <li><a href="jeans.html">Pants</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Women</a>
+                    <ul class="submenu">
+                        <li><a href="sarees.html">Sarees</a></li>
+                        <li><a href="kurtis.html">Kurtis</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Kids</a>
+                    <ul class="submenu">
+                        <li><a href="boys.html">Boys</a></li>
+                        <li><a href="girls.html">Girls</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Electronics</a>
+                    <ul class="submenu">
+                        <li><a href="electronic.html">Home Products</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sear">
+            <input type="text" id="product-search" placeholder="Search here...">
+            <i class="fas fa-search" id="search-icon" onclick="filterProducts()"></i>
+        </div>
+    
+        <div class="nav-btn">
+            <a href="login.html" class="login">Login</a>
+            <a href="validation.html">Register</a>
+        </div>
+    
+        <div class="profile">
+            <a href="profile.html">
+                <i class="fas fa-user"></i>
+                <h6>Profile</h6>
+            </a>
+        </div>
+        <div class="profile">
+            <a href="your-orders.html">
+                <i class="fas fa-user"></i>
+                <h6>Your Orders</h6>
+            </a>
+        </div>
+        <div class="Cart">
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart"></i>
+                <h6>Cart (<span id="cart-count">0</span>)</h6>
+            </a>
+        </div>
+    </div>
+    <!-- Navbar end -->
+
+
+
+
+    <div class="seemore">
+
+
+
+        <!-- product section -->
+        <section class="product-container">
+            <!-- left side -->
+            <div class="img-card">
+                <img id="main-img" src="images/jeans-3.webp" alt="" id="featured-image">
+
+            </div>
+            <!-- Right side -->
+            <div class="product-info" data-name="Dark-pant-with-soft-cotton" data-price="700">
+                <h3>Dark-pant-with-soft-cotton</h3>
+                <h5>Price: 700 <del>770</del></h5>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa accusantium, aspernatur provident
+                    beatae corporis veniam atque facilis, consequuntur assumenda, vitae dignissimos iste exercitationem
+                    dolor eveniet alias eos ullam nesciunt voluptatum.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore accusamus natus dolorum. Quaerat
+                    nulla quod doloremque, officia quis provident amet adipisci unde esse iure delectus, maxime
+                    inventore optio fuga nisi?</p>
+
+                <div class="sizes">
+                    <p>Size:</p>
+                    <div class="diff-size">
+                        <h5 data-size="22" onclick="selectSize(22)">22</h5>
+                        <h5 data-size="25" onclick="selectSize(25)">25</h5>
+                        <h5 data-size="28" onclick="selectSize(28)">28</h5>
+                    </div>
+                </div>
+                <div id="popup-container" class="popup-container">
+                    <div class="popup">
+                        <p id="popup-message"></p>
+                        <button id="popup-ok-button" class="popup-ok-button">OK</button>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <input type="number" class="product-quantity" value="1" min="1">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <!-- Buy Now button -->
+                    <button class="buy-now">Buy Now</button>
+                </div>
+
+                <div>
+                    <p>Delivery:</p>
+                    <p>Free standard shipping on orders over and free returns.</p>
+
+                </div>
+            </div>
+            <div class="img-card">
+                <!-- Image and small cards -->
+                <!-- small img -->
+                <div class="small-Card">
+                    <img id="img1" onclick="change('img1')" src="images/men-1-alter.webp" alt="" class="small-Img">
+                    <img id="img2" onclick="change('img2')" src="images/men-1-alter.webp" alt="" class="small-Img">
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Men</a></li>
+                        <li><a href="#">Women</a></li>
+                        <li><a href="#">Kids</a></li>
+                        <li><a href="#">Sarees</a></li>
+                        <li><a href="#">Kurtas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Clothing Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

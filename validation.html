@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Add CSS for invalid input */
+        .input-box input:invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Register form start-->
+<div class="reg-container">
+    <div class="reg-main">
+        <h2 class="reg-h2">Great Welcome Our Website</h2>
+        <h6 class="reg-h6">Personal Details<span>?</span></h6>
+        <div class="reg-form">
+            <div class="input-box">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" placeholder="Enter First Name" required>
+            </div>
+            <div class="input-box">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" placeholder="Enter Last Name" required>
+            </div>
+            <div class="input-box">
+                <label for="mobileNo">Mobile No</label>
+                <input type="text" id="mobileNo" placeholder="Enter Mobile No" required>
+            </div>
+            <div class="input-box">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" placeholder="Enter DOB" required>
+            </div>
+            <div class="input-box">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter Your Email" required>
+            </div>
+            <div class="input-box">
+                <label for="password">Enter Your Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="input-box">
+                <input type="button" class="btn" value="Agree and Create Account" onclick="validateForm()">
+            </div>
+        </div>
+    </div>
+    <div id="popup-container" class="popup-container">
+        <div class="popup">
+            <p id="popup-message"></p>
+            <button id="popup-ok-button" class="popup-ok-button">OK</button>
+        </div>
+    </div>
+</div>
+<!-- Register form End-->
+
+<script>
+    function validateForm() {
+        // Get input values
+        var firstName = document.getElementById('firstName').value.trim();
+        var lastName = document.getElementById('lastName').value.trim();
+        var mobileNo = document.getElementById('mobileNo').value.trim();
+        var dob = document.getElementById('dob').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+
+        // Regular expressions for validation
+        var mobileRegex = /^\d{10}$/; // Validates 10 digit mobile number
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Validates email format
+        
+
+        // Validation checks
+        if (firstName === "") {
+            showPopup("Please enter Last Name");
+            return;
+        }
+        if (lastName === "") {
+            showPopup("Please enter Last Name");
+            return;
+        }
+        if (!mobileRegex.test(mobileNo)) {
+            showPopup("Please enter valid Mobile No (10 digits)");
+            return;
+        }
+        if (dob === "") {
+            showPopup("Please enter Date of Birth");
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            showPopup("Please enter valid Email Address");
+            return;
+        }
+        if (password === "") {
+            showPopup("Please enter Password");
+            return;
+        }
+
+        // If all validations pass, you can proceed to store data in local storage or submit the form
+        showPopup('Register Successfully.');
+
+        // Example: Storing in local storage
+        var userData = {
+            firstName: firstName,
+            lastName: lastName,
+            mobileNo: mobileNo,
+            dob: dob,
+            email: email,
+            password:password
+            // Add more fields as needed
+        };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+        // Redirect to home page after form submission
+        window.location.href = 'index.html';
+    }
+</script>
+
+</body>
+</html>

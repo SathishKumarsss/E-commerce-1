@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar start -->
+<div class="nav-main">
+    <div class="logo">
+        <h1><span>Fashion</span>Plus</h1>
+    </div>
+    
+    <div class="nav-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Men</a>
+                <ul class="submenu">
+                    <li><a href="shirt.html">Shirts</a></li>
+                    <li><a href="jeans.html">Pants</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Women</a>
+                <ul class="submenu">
+                    <li><a href="sarees.html">Sarees</a></li>
+                    <li><a href="kurtis.html">Kurtis</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Kids</a>
+                <ul class="submenu">
+                    <li><a href="boys.html">Boys</a></li>
+                    <li><a href="girls.html">Girls</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Electronics</a>
+                <ul class="submenu">
+                    <li><a href="electronic.html">Home Products</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="sear">
+        <input type="text" id="product-search" placeholder="Search here...">
+        <i class="fas fa-search" id="search-icon" onclick="filterProducts()"></i>
+    </div>
+
+    <div class="nav-btn">
+        <a href="login.html" class="login">Login</a>
+        <a href="validation.html">Register</a>
+    </div>
+
+    <div class="profile">
+        <a href="profile.html">
+            <i class="fas fa-user"></i>
+            <h6>Profile</h6>
+        </a>
+    </div>
+    <div class="profile">
+        <a href="your-orders.html">
+            <i class="fas fa-user"></i>
+            <h6>Your Orders</h6>
+        </a>
+    </div>
+    <div class="Cart">
+        <a href="cart.html">
+            <i class="fas fa-shopping-cart"></i>
+            <h6>Cart (<span id="cart-count">0</span>)</h6>
+        </a>
+    </div>
+</div>
+<!-- Navbar end -->
+
+  
+<div class="profil-main">
+    <!-- Profile Details Start -->
+    <div class="profile-container">
+        <h2>Your Profile Details</h2>
+        <table class="profile-details">
+            <tr>
+                <th>Field</th>
+                <th>Details</th>
+            </tr>
+            <tbody id="profileDetails"></tbody>
+        </table>
+        <button onclick="logout()">Logout</button>
+    </div>
+    <!-- Profile Details End -->
+</div>
+<script>
+     // Retrieve user data from local storage
+     var userData = JSON.parse(localStorage.getItem('userData'));
+
+if (userData) {
+    var profileDetails = document.getElementById('profileDetails');
+    profileDetails.innerHTML = `
+        <tr>
+            <td><strong>First Name:</strong></td>
+            <td>${userData.firstName}</td>
+        </tr>
+        <tr>
+            <td><strong>Last Name:</strong></td>
+            <td>${userData.lastName}</td>
+        </tr>
+        <tr>
+            <td><strong>Mobile No:</strong></td>
+            <td>${userData.mobileNo}</td>
+        </tr>
+        <tr>
+            <td><strong>Date of Birth:</strong></td>
+            <td>${userData.dob}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>${userData.email}</td>
+        </tr>
+        <tr>
+            <td><strong>Password:</strong></td>
+            <td>${userData.password}</td>
+        </tr>
+    `;
+} else {
+    document.getElementById('profileDetails').innerHTML = "<tr><td colspan='2'>No profile details found.</td></tr>";
+}
+
+function logout() {
+    localStorage.removeItem('userData');
+    window.location.href = 'index.html';
+}
+    
+
+    
+       
+  
+  
+
+</script>
+
+
+<style>
+      
+        .profil-main {
+            position: relative;
+            top: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .profile-container {
+            text-align: center;
+        }
+        .profile-container h2 {
+            margin-bottom: 20px;
+        }
+        .profile-details {
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .profile-details td, .profile-details th {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .profile-details th {
+            background-color: #007bff;
+            color: white;
+        }
+        .profile-details tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+</style>
+</body>
+</html>
+

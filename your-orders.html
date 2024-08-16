@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar start -->
+<div class="nav-main">
+    <div class="logo">
+        <h1><span>Fashion</span>Plus</h1>
+    </div>
+    
+    <div class="nav-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Men</a>
+                <ul class="submenu">
+                    <li><a href="shirt.html">Shirts</a></li>
+                    <li><a href="jeans.html">Pants</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Women</a>
+                <ul class="submenu">
+                    <li><a href="sarees.html">Sarees</a></li>
+                    <li><a href="kurtis.html">Kurtis</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Kids</a>
+                <ul class="submenu">
+                    <li><a href="boys.html">Boys</a></li>
+                    <li><a href="girls.html">Girls</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Electronics</a>
+                <ul class="submenu">
+                    <li><a href="electronic.html">Home Products</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="sear">
+        <input type="text" placeholder="Search your Product here...">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <div class="nav-btn">
+        <a href="login.html">Login</a>
+        <a href="validation.html">Register</a>
+    </div>
+
+    <div class="profile">
+        <a href="profile.html">
+            <i class="fas fa-user"></i>
+            <h6>Profile</h6>
+        </a>
+    </div>
+    <div class="profile">
+        <a href="your-orders.html">
+            <i class="fas fa-user"></i>
+            <h6>Your Orders</h6>
+        </a>
+    </div>
+    <div class="Cart">
+        <a href="cart.html">
+            <i class="fas fa-shopping-cart"></i>
+           <h6>Cart (<span id="cart-count">0</span>)</h6>
+        </a>
+    </div>
+</div>
+<!-- Navbar end -->
+   
+<h1 style="text-align: center;">Your Orders</h1>
+<div class="order-container">
+    <table class="order-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Product Details</th>
+                <th>Product Size</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>CGST</th>
+                <th>SGST</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody class="order-items">
+            <!-- Order items will be injected here -->
+        </tbody>
+    </table>
+    <div class="cart-summary">
+        <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+        <p>CGST: <span id="cart-cgst">$0.00</span></p>
+        <p>SGST: <span id="cart-sgst">$0.00</span></p>
+        <p>Total: <span id="cart-total">$0.00</span></p>
+    </div>
+    <button id="remove-history" class="remove">Remove Purchase History</button>
+</div>
+<div id="popup-container" class="popup-container">
+    <div class="popup">
+        <p id="popup-message"></p>
+        <button id="popup-ok-button" class="popup-ok-button">OK</button>
+    </div>
+</div>  
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-links">
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Kids</a></li>
+                    <li><a href="#">Sarees</a></li>
+                    <li><a href="#">Kurtas</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Clothing Store. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+   
+
+    <script>
+   
+   document.addEventListener('DOMContentLoaded', () => {
+    const orderItemsContainer = document.querySelector('.order-items');
+    const removeHistoryButton = document.getElementById('remove-history');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const cartCGST = document.getElementById('cart-cgst');
+    const cartSGST = document.getElementById('cart-sgst');
+    const cartTotal = document.getElementById('cart-total');
+
+    function renderOrderItems() {
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails')) || [];
+        orderItemsContainer.innerHTML = '';
+        let subtotal = 0;
+
+        orderDetails.forEach(item => {
+            const orderItem = document.createElement('tr');
+            orderItem.innerHTML = `
+                <td><img src="${item.img}" alt="${item.name}" class="cart-item-img"></td>
+                <td>${item.name}</td>
+                <td>${item.details}</td>
+                <td>${item.size}</td>
+                <td>${item.price.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>${(item.price * 0.09).toFixed(2)}</td>
+                <td>${(item.price * 0.09).toFixed(2)}</td>
+                <td>${(item.price + item.price * 0.09 * 2).toFixed(2)}</td>
+            `;
+            orderItemsContainer.appendChild(orderItem);
+            subtotal += item.price * item.quantity;
+        });
+
+        const cgst = subtotal * 0.09;
+        const sgst = subtotal * 0.09;
+        const total = subtotal + cgst + sgst;
+
+        cartSubtotal.textContent = `${subtotal.toFixed(2)}`;
+        cartCGST.textContent = `${cgst.toFixed(2)}`;
+        cartSGST.textContent = `${sgst.toFixed(2)}`;
+        cartTotal.textContent = `${total.toFixed(2)}`;
+    }
+
+    renderOrderItems();
+
+    // Event listener for the "Remove Purchase History" button
+    removeHistoryButton.addEventListener('click', () => {
+        const confirmRemove = confirm("Are you sure you want to remove your purchase history?");
+        if (confirmRemove) {
+        localStorage.removeItem('orderDetails'); // Remove the 'orderDetails' key from localStorage
+        orderItemsContainer.innerHTML = ''; // Clear the displayed order items
+        cartSubtotal.textContent = '$0.00';
+        cartCGST.textContent = '$0.00';
+        cartSGST.textContent = '$0.00';
+        cartTotal.textContent = '$0.00';
+        showPopup('Remove Purchase History successfully!');
+        }
+    });
+});
+
+
+
+
+     </script>
+
+    <style>
+    
+        .order-container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-table th, .order-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background-color:#FFDEAD;
+        }
+
+        .order-table td img {
+            width: 50px;
+            height: auto;
+        }
+        .remove{
+            background-color: red;
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .cart-summary {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-direction: column;
+        
+        
+    }
+
+    .cart-summary p {
+        font-size: 16px;
+        margin: 5px 0;
+        
+    }
+
+    .cart-summary span {
+        font-weight: bold;
+    }
+
+    </style>
+</body>
+</html>
